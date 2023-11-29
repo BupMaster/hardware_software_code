@@ -34,12 +34,12 @@ def decimal_to_binary(decimal_num):
     # Return the final binary string or "0" if empty
     return binary_str if binary_str else "0"
 
-# Function to convert hexadecimal to decimal
-def hex_to_decimal(hex_str):
-    # Use the int function to convert the hexadecimal string to decimal
-    decimal_num = int(hex_str, 16)
-    # Return the final decimal number
-    return decimal_num
+# Function to convert binary to hexadecimal
+def binary_to_hex(binary_str):
+    # Convert binary to decimal and then decimal to hexadecimal
+    decimal_num = binary_to_decimal(binary_str)
+    hex_str = decimal_to_hex(decimal_num)
+    return hex_str
 
 # Function to convert decimal to hexadecimal
 def decimal_to_hex(decimal_num):
@@ -47,6 +47,20 @@ def decimal_to_hex(decimal_num):
     hex_str = hex(decimal_num)[2:]
     # Convert the result to uppercase and return the final hexadecimal string
     return hex_str.upper()
+
+# Function to convert hexadecimal to decimal
+def hex_to_decimal(hex_str):
+    # Use the int function to convert the hexadecimal string to decimal
+    decimal_num = int(hex_str, 16)
+    # Return the final decimal number
+    return decimal_num
+
+# Function to convert hexadecimal to binary
+def hex_to_binary(hex_str):
+    # Convert hexadecimal to decimal and then decimal to binary
+    decimal_num = hex_to_decimal(hex_str)
+    binary_str = decimal_to_binary(decimal_num)
+    return binary_str
 
 # Function to convert octal to decimal
 def octal_to_decimal(octal_str):
@@ -68,11 +82,13 @@ while True:
     print("Choose the following conversion:")
     print("(1) Binary to Decimal")
     print("(2) Decimal to Binary")
-    print("(3) Hexadecimal to Decimal")
+    print("(3) Binary to Hexadecimal")
     print("(4) Decimal to Hexadecimal")
-    print("(5) Octal to Decimal")
-    print("(6) Decimal to Octal")
-    selection = input("Enter a valid selection (1-6): ")
+    print("(5) Hexadecimal to Decimal")
+    print("(6) Hexadecimal to Binary")
+    print("(7) Octal to Decimal")
+    print("(8) Decimal to Octal")
+    selection = input("Enter a valid selection (1-8): ")
 
     # Binary to Decimal conversion
     if selection == '1':
@@ -95,15 +111,15 @@ while True:
         else:
             print("Invalid decimal input!")
 
-    # Hexadecimal to Decimal conversion
+    # Binary to Hexadecimal conversion
     elif selection == '3':
-        hex_input = input("Enter a hexadecimal number: ")
-        # Check if the input contains valid hexadecimal characters
-        if all(digit in '0123456789ABCDEFabcdef' for digit in hex_input):
-            decimal_result = hex_to_decimal(hex_input)
-            print("The number you converted is " + hex_input + ", this in decimal is " + str(decimal_result))
+        binary_input = input("Enter a binary number: ")
+        # Check if the input contains only '0' and '1'
+        if all(digit in '01' for digit in binary_input):
+            hex_result = binary_to_hex(binary_input)
+            print("The number you converted is " + binary_input + ", this in hexadecimal is " + hex_result)
         else:
-            print("Invalid hexadecimal input!")
+            print("Invalid binary input!")
 
     # Decimal to Hexadecimal conversion
     elif selection == '4':
@@ -116,8 +132,28 @@ while True:
         else:
             print("Invalid decimal input!")
 
-    # Octal to Decimal conversion
+    # Hexadecimal to Decimal conversion
     elif selection == '5':
+        hex_input = input("Enter a hexadecimal number: ")
+        # Check if the input contains valid hexadecimal characters
+        if all(digit in '0123456789ABCDEFabcdef' for digit in hex_input):
+            decimal_result = hex_to_decimal(hex_input)
+            print("The number you converted is " + hex_input + ", this in decimal is " + str(decimal_result))
+        else:
+            print("Invalid hexadecimal input!")
+
+    # Hexadecimal to Binary conversion
+    elif selection == '6':
+        hex_input = input("Enter a hexadecimal number: ")
+        # Check if the input contains valid hexadecimal characters
+        if all(digit in '0123456789ABCDEFabcdef' for digit in hex_input):
+            binary_result = hex_to_binary(hex_input)
+            print("The number you converted is " + hex_input + ", this in binary is " + binary_result)
+        else:
+            print("Invalid hexadecimal input!")
+
+    # Octal to Decimal conversion
+    elif selection == '7':
         octal_input = input("Enter an octal number: ")
         # Check if the input contains valid octal characters
         if all(digit in '01234567' for digit in octal_input):
@@ -127,7 +163,7 @@ while True:
             print("Invalid octal input!")
 
     # Decimal to Octal conversion
-    elif selection == '6':
+    elif selection == '8':
         decimal_input = input("Enter a decimal number: ")
         # Check if the input consists of digits
         if decimal_input.isdigit():
