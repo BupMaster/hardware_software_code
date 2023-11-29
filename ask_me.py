@@ -1,6 +1,6 @@
 # Function to handle user selection
 def user_selection(num):
-    print(f"User selected: {num}")
+    print("User selected:" + num)
 
 # Main program
 def main():
