@@ -4,6 +4,14 @@
 # Continues running until the user chooses to stop converting numbers, and the program terminates.
 
 # Function to convert binary to decimal
+from os import system, name
+
+def clear_screen():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
+
 def binary_to_decimal(binary_str):
     decimal_num = 0
     power = len(binary_str) - 1
@@ -78,8 +86,11 @@ def decimal_to_octal(decimal_num):
 
 # Main program loop
 while True:
+    # Clear the screen when the user continues converting numbers
+    clear_screen()
     print("Welcome to my number converter! :333")
     print("Choose the following conversion:")
+    print()
     print("(1) Binary to Decimal")
     print("(2) Decimal to Binary")
     print("(3) Binary to Hexadecimal")
