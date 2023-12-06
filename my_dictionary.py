@@ -1,18 +1,23 @@
 def main():
-    menu_items = {
+    animals = {
         1: "Cats",
         2: "Dogs",
         3: "Birds",
         4: "Fish",
-        5: "Rabbit",
+        5: "Rabbits",
     }
 
-    print("Menu:")
-    print("1. " + menu_items[1])
-    print("2. " + menu_items[2])
-    print("3. " + menu_items[3])
-    print("4. " + menu_items[4])
-    print("5. " + menu_items[5])
+    print("Animal List:")
+    for key, value in animals.items():
+        print("{}. {}".format(key, value))
+
+    user_choice = int(input("Pick a number to choose your favorite animal: "))
+
+    if user_choice in animals:
+        chosen_animal = animals[user_choice]
+        print("You chose {} as your favorite animal!".format(chosen_animal))
+    else:
+        print("Invalid choice. Please pick a number from the menu.")
 
 if __name__ == "__main__":
     main()
