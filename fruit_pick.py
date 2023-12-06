@@ -15,12 +15,16 @@ def add_fruit(menu_dict, next_key):
     # Allows the user to add their favorite fruit to the menu.
     user_fruit = input("Enter the name of your favorite fruit: ")
     
+    # Remove 'X' option from the menu
+    if 'X' in menu_dict:
+        del menu_dict['X']
+
     # Assigning the next available key
-    user_key = str(next_key)
+    user_key = str(max(map(int, menu_dict.keys())) + 1)
     menu_dict[user_key] = user_fruit
 
-    # Increment the next key for the next addition
-    next_key += 1
+    # Re-add 'X' option at the end of the menu
+    menu_dict['X'] = 'pick your own'
 
     # Clear the screen and then display the message
     clear_screen()
@@ -36,8 +40,6 @@ def main():
         'X': 'pick your own',
     }
 
-    next_key = len(menu_dict) + 1
-
     while True:
         display_menu(menu_dict)
 
@@ -47,8 +49,9 @@ def main():
         if user_choice == 'Q':
             break
         elif user_choice == 'X':
-            add_fruit(menu_dict, next_key)
+            add_fruit(menu_dict, 0)  # Start with 0 to recalculate next_key
         elif user_choice in menu_dict:
+            clear_screen()
             print("You chose: {}, nice choice!".format(menu_dict[user_choice].capitalize()))
             print()
         else:
