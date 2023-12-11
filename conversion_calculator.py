@@ -1,11 +1,12 @@
-# Number Conversion Calculator
+# Number Conversion Calculator by  
 # The program is a command-line number converter, allowing users to convert between binary, decimal, hexadecimal, and octal numbers.
 # Provides a user-friendly interface and input validation.
 # Continues running until the user chooses to stop converting numbers, and the program terminates.
 
-# Function to convert binary to decimal
+# Function for clear_screen
 from os import system, name
 
+# Clears the screen when function is called
 def clear_screen():
     if name == 'nt':
         _ = system('cls')
